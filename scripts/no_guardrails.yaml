@@ -1,0 +1,11 @@
+async_chunk: false
+stages:
+  - stage_id: 0
+    async_chunk: false
+    max_num_seqs: 1
+    enforce_eager: true
+    trust_remote_code: true
+    model_class_name: Cosmos3OmniDiffusersPipeline
+    model_config:
+      guardrails: false
+      offload_guardrail_models: false
