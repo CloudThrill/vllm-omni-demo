@@ -1,0 +1,37 @@
+# generated scratch output (anywhere EXCEPT media/)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.mov
+*.wav
+*.mp3
+# ...but keep the curated demo assets
+!media/
+!media/**
+
+# secrets / keys — never commit
+box.env.local
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+*_rsa
+*_rsa.pub
+hf_token*
+*.token
+.nebius/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+.venv/
+venv/
