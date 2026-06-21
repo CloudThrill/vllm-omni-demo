@@ -66,15 +66,38 @@ scp -i ~/.ssh/id_rsa_oci scripts/serve_*.sh scripts/no_guardrails.yaml \
 ```
 
 **Serve a model (on the box), then query it (laptop, via tunnel):**
+- Each model: start the container, wait for the serving line, hit it from the laptop, stop to free the GPU.
 
 ```bash
-./serve_image.sh && docker logs -f omni     # wait for the serving line
-# ... then from the laptop, hit :8091 — see requests/REQUESTS.md
-docker stop omni                            # swap off, frees the GPU
+# ── IMAGE · Z-Image (You can also use vLLm-Playground───────────────────────────────
+./serve_image.sh && docker logs -f omni        # wait for the serving line
+curl -s http://localhost:8091/v1/models | jq -r '.data[0].id'   # → Tongyi-MAI/Z-Image-Turbo
+# query from the laptop (see requests/REQUESTS.md), then:
+docker stop omni
+
+# ── IMAGE → VIDEO · Wan2.2 ────────────────────────
+./serve_video.sh && docker logs -f omni        # Cache-DiT on; warm once (cold start is slow)
+curl -s http://localhost:8091/v1/models | jq -r '.data[0].id'   # → Wan-AI/Wan2.2-TI2V-5B-Diffusers
+docker stop omni
+
+# ── SPEECH · Qwen3-TTS ────────────────────────────
+./serve_tts.sh && docker logs -f omni
+curl -s http://localhost:8091/v1/models | jq -r '.data[0].id'   # → Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice
+docker stop omni
+
+# ── WORLD MODEL · Cosmos 3 ────────────────────────
+# Cosmos needs the whole GPU + its own port (8000). Stop the :8091 container first.
+docker stop omni 2>/dev/null
+./serve_cosmos.sh && docker logs -f cosmos     # wait for "Application startup complete." (slow load)
+curl -s http://localhost:8000/v1/models | jq -r '.data[0].id'   # → nvidia/Cosmos3-Nano
+docker stop cosmos
 ```
 
 Repeat for `serve_video.sh`, `serve_tts.sh`. For Cosmos, stop the `:8091`
-container first (it needs the whole GPU), then `./serve_cosmos.sh`.
+container first (it needs the whole GPU), then `./serve_cosmos.sh`. 
+> Each serve_*.sh clears any leftover container first, so swaps never collide. Image/video/speech share :8091; Cosmos is on :8000. The standalone request for each lives in requests/REQUESTS.md.
+
+## DEMOs
 
 **Or drive everything from the menu** (servers must already be running):
 
