@@ -6,10 +6,10 @@
 #     source ./provision.sh
 #
 # Prereqs: nebius CLI authenticated, jq installed, an SSH keypair at
-# ~/.ssh/id_rsa_oci(.pub). Adjust KEY if yours differs.
+# ~/.ssh/id_rsa(.pub). Adjust KEY if yours differs.
 
 set -u
-KEY=~/.ssh/id_rsa_oci
+KEY=~/.ssh/id_rsa
 
 need() {  # guard: bail (return, not exit — we're sourced) if a var is empty
   if [ -z "${!1:-}" ]; then echo "✗ $1 is empty — stopping."; return 1; fi
@@ -18,8 +18,7 @@ need() {  # guard: bail (return, not exit — we're sourced) if a var is empty
 # 0 · bind tenant + project (index 0 = first of each; change if you have several)
 export TENANT_ID=$(nebius iam tenant list --format json | jq -r '.items[0].metadata.id')
 need TENANT_ID || return 1
-export PROJECT_ID=$(nebius iam project list --parent-id "$TENANT_ID" --format json \
-  | jq -r '.items[0].metadata.id')
+export PROJECT_ID=$(nebius iam project list --parent-id "$TENANT_ID" --format json | jq -r '.items[0].metadata.id')
 need PROJECT_ID || return 1
 nebius config set parent-id "$PROJECT_ID"
 echo "✓ project: $(nebius config get parent-id)"
@@ -58,8 +57,7 @@ need INF_VM_ID || return 1
 echo "✓ vm:      $INF_VM_ID"
 
 # 4 · public IP
-export INF_IP=$(nebius compute instance get --id "$INF_VM_ID" --format json \
-  | jq -r '.status.network_interfaces[0].public_ip_address.address | split("/")[0]')
+export INF_IP=$(nebius compute instance get --id "$INF_VM_ID" --format json | jq -r '.status.network_interfaces[0].public_ip_address.address | split("/")[0]')
 need INF_IP || return 1
 echo "✓ ip:      $INF_IP"
 
