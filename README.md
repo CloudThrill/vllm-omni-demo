@@ -100,7 +100,7 @@ container first (it needs the whole GPU), then `./serve_cosmos.sh`.
 **Or drive everything from the menu** (servers must already be running):
 
 ```bash
-./demo_menu.sh      # pick a modality, it prints + times the request
+scripts/demo_menu.sh      # pick a modality, it prints + times the request
 ```
 
 ## Demo videos
@@ -123,7 +123,7 @@ Each modality served on the same H100, captured live.
 ### Teardown when done (laptop) — stop the meter:
 
 ```bash
-./cleanup.sh        # derives ids by name, deletes instance then disk
+scripts/cleanup.sh        # derives ids by name, deletes instance then disk
 ```
 
 ---
