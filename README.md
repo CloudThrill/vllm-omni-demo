@@ -114,7 +114,7 @@ Each modality served on the same H100, captured live.
 [![Wan2.2 demo](https://img.youtube.com/vi/p4DBSLNed6Y/hqdefault.jpg)](https://youtu.be/p4DBSLNed6Y)
 
 ### Speech · Qwen3-TTS
-
+[![Qwen3-TTS demo](https://img.youtube.com/vi/Bwa9QRqyoYY/hqdefault.jpg)](https://youtu.be/Bwa9QRqyoYY)
 
 ### World model · Cosmos 3 (with sound 🔊)
 [![Cosmos 3 demo](https://img.youtube.com/vi/NV6LlCe7GJo/hqdefault.jpg)](https://youtu.be/NV6LlCe7GJo)
