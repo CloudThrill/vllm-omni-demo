@@ -97,15 +97,30 @@ Repeat for `serve_video.sh`, `serve_tts.sh`. For Cosmos, stop the `:8091`
 container first (it needs the whole GPU), then `./serve_cosmos.sh`. 
 > Each serve_*.sh clears any leftover container first, so swaps never collide. Image/video/speech share :8091; Cosmos is on :8000. The standalone request for each lives in requests/REQUESTS.md.
 
-## DEMOs
-
 **Or drive everything from the menu** (servers must already be running):
 
 ```bash
 ./demo_menu.sh      # pick a modality, it prints + times the request
 ```
 
-**Teardown when done (laptop) — stop the meter:**
+## Demo videos
+
+Each modality served on the same H100, captured live.
+
+### Image · Z-Image
+[![Z-Image demo](https://img.youtube.com/vi/Wuy9Yw0SZRg/hqdefault.jpg)](https://youtu.be/Wuy9Yw0SZRg)
+
+### Image → Video · Wan2.2
+[![Wan2.2 demo](https://img.youtube.com/vi/p4DBSLNed6Y/hqdefault.jpg)](https://youtu.be/p4DBSLNed6Y)
+
+### Speech · Qwen3-TTS
+[![Qwen3-TTS demo](https://img.youtube.com/vi/Bwa9QRqyoYY/hqdefault.jpg)](https://youtu.be/Bwa9QRqyoYY)
+
+### World model · Cosmos 3 (with sound 🔊)
+[![Cosmos 3 demo](https://img.youtube.com/vi/NV6LlCe7GJo/hqdefault.jpg)](https://youtu.be/NV6LlCe7GJo)
+
+
+### Teardown when done (laptop) — stop the meter:
 
 ```bash
 ./cleanup.sh        # derives ids by name, deletes instance then disk
