@@ -2,7 +2,7 @@
 
 Serve four modalities through one engine on a single H100 — image, video, speech, and a world model — swapped on the same GPU. The scripts behind my Conf42 LLMs 2026 talk, *How vLLM-Omni Unifies Multimodal Inference*.
 
-📖 **Full walkthrough:** [vLLM-Omni on Nebius H100 — cloudthrill.ca](https://cloudthrill.ca)
+📖 **Full walkthrough:** [vLLM-Omni on Nebius H100 — cloudthrill.ca]([https://cloudthrill.ca](https://cloudthrill.ca/vllm-omni-on-nebius-cosmos-3))
 🎥 **Talk:** [YouTube](https://www.youtube.com/watch?v=GPTqJzNcEWs)
 
 This repo is the clone-and-run companion. The blog is the narrative; this is the quickstart.
